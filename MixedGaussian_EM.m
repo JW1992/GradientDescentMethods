@@ -1,4 +1,4 @@
-% EM method to solve a mixed (2D) Gaussian problem.
+% EM method to solve a mixed (2D), Gaussian problem.
 close all;
 
 global M K
@@ -13,7 +13,7 @@ ThetaProb = linspace(0, 1, 4);
 Mu = rand(K,2)*12;
 Sigma = rand(K,2)*5;
 
-x = zeros(100,2);
+x = zeros(M, 2);
 
 figure; hold on;
 
@@ -23,9 +23,10 @@ for i = 1:M
         if rnd>=ThetaProb(j) && rnd<ThetaProb(j+1)
             x(i,1) = normrnd(Mu(j,1), sqrt(Sigma(j,1)));
             x(i,2) = normrnd(Mu(j,2), sqrt(Sigma(j,2)));
-            plot(x(i,1), x(i,2), '*', ...
+            plot(x(i,1), x(i,2), '.', ...
                 'MarkerFaceColor', [0+1/K*j, 1-1/K*j, 0], ...
-                'MarkerEdgeColor', [0+1/K*j, 1-1/K*j, 0]);
+                'MarkerEdgeColor', [0+1/K*j, 1-1/K*j, 0] ...
+            );
             break;
         end
     end
@@ -78,9 +79,10 @@ end
 figure; hold on;
 for i = 1:M
     [m, j] = max(w(i,:));
-    plot(x(i,1), x(i,2), '*', ...
+    plot(x(i,1), x(i,2), '.', ...
             'MarkerFaceColor', [0+1/K*j, 1-1/K*j, 0], ...
-            'MarkerEdgeColor', [0+1/K*j, 1-1/K*j, 0]);
+            'MarkerEdgeColor', [0+1/K*j, 1-1/K*j, 0] ...
+         );
 end
 
 disp(Mu);
@@ -89,3 +91,6 @@ disp(ThetaProb);
 disp(Mu_est);
 disp(Sigma_est);
 disp(Phi_est);
+
+disp('Total steps');
+disp(cnt);
